@@ -1,22 +1,22 @@
 import _ from "lodash";
 
-export default (initialState = {}, action) => {
+export default (state = {}, action) => {
   switch (action.type) {
+    case "GET_TODOS":
+      return { ...state, ..._.mapKeys(action.todos, "id") };
     case "ADD_TODO":
-      console.log(action.payload);
-      return { ...initialState, [action.payload.id]: action.payload };
+      return { ...state, [action.payload.id]: action.payload };
     case "DELETE_TODO":
-      return _.omit(initialState, action.payload);
+      return _.omit(state, action.payload);
     case "CHECK_TODO":
-      console.log(action.payload);
       return {
-        ...initialState,
+        ...state,
         [action.payload]: {
-          ...initialState[action.payload],
-          isTouched: !initialState[action.payload].isTouched
+          ...state[action.payload],
+          isTouched: !state[action.payload].isTouched
         }
       };
     default:
-      return initialState;
+      return state;
   }
 };

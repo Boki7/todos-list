@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addTodo } from "../../../store/actions/index";
+import { addTodoToBase } from "../../../store/actions/index";
 import TodosForm from "../TodosForm/TodosForm";
 
-const AddTodo = ({ addTodo }) => {
+const AddTodo = ({ addTodoToBase }) => {
   const onSubmit = formValues => {
-    addTodo(formValues);
+    addTodoToBase(formValues);
   };
   return <TodosForm onSubmit={onSubmit} />;
 };
@@ -13,6 +13,6 @@ const AddTodo = ({ addTodo }) => {
 export default connect(
   null,
   {
-    addTodo
+    addTodoToBase
   }
 )(AddTodo);
