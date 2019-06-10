@@ -1,10 +1,9 @@
 import uniqid from "uniqid";
 import axios from "axios";
 
-export const addTodo = (name, formValues) => {
+export const addTodo = formValues => {
   return {
     type: "ADD_TODO",
-    name,
     formValues
   };
 };
@@ -41,7 +40,6 @@ export const fetchTodos = () => {
     const response = await axios.get(
       "https://todolist-b3ae6.firebaseio.com/todos.json"
     );
-    console.log(response);
     dispatch(getTodos(response.data));
   };
 };
@@ -57,6 +55,6 @@ export const addTodoToBase = formValues => {
       "https://todolist-b3ae6.firebaseio.com/todos.json",
       todo
     );
-    dispatch(addTodo(response.data));
+    dispatch(addTodo(JSON.parse(response.config.data)));
   };
 };
