@@ -1,2 +1,2 @@
-export { addTodoToBase, deleteTodo, checkTodo, fetchTodos } from "./todos";
+export { addTodo, checkTodo, fetchTodos, deleteTodo } from "./todos";
 export { isSignedIn } from "./auth";

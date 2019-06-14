@@ -6,9 +6,17 @@ import Icon from "../../UI/Icon/Icon";
 import Todo from "../Todo/Todo";
 import "./TodosList.css";
 
-const TodosList = ({ todos, deleteTodo, checkTodo }) => {
+const TodosList = ({ todos, deleteTodo, checkTodo, userID }) => {
   if (todos.length === 0) {
     return <div className="text-center">Add Todos!</div>;
+  }
+
+  const editTodo = todo => {
+    const editedTodo = {
+      ...todo,
+      isTouched: !todo.isTouched
+    }
+    checkTodo(editedTodo)
   }
 
   const renderList = () => {
@@ -21,19 +29,20 @@ const TodosList = ({ todos, deleteTodo, checkTodo }) => {
         textDecoration: "none"
       }
     };
-    return todos.map(todo => {
+    return todos.filter(todo => todo.userID === userID).map(todo => {
       return (
         <li
           className="list-group-item d-flex justify-content-between align-items-center font-italic"
           key={todo.id}
         >
           <Icon
-            click={() => checkTodo(todo.id)}
+            click={() => editTodo(todo)}
             classes={[
               todo.isTouched ? "fas fa-check-square" : "fas fa-square",
               "check-icon"
             ].join(" ")}
-          />
+          />\
+          
           <Todo
             title={todo.todoTitle}
             classes="m-0"
@@ -62,7 +71,8 @@ const TodosList = ({ todos, deleteTodo, checkTodo }) => {
 
 const mapStateToProps = state => {
   return {
-    todos: Object.values(state.todos)
+    todos: Object.values(state.todos),
+    userID: state.auth.userID
   };
 };
 
@@ -73,3 +83,5 @@ export default connect(
     checkTodo
   }
 )(TodosList);
+
+

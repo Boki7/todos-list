@@ -1,5 +1,6 @@
 const initialState = {
-  isSigned: false
+  isSigned: false,
+  userID: ''
 };
 
 export default (state = initialState, action) => {
@@ -7,6 +8,7 @@ export default (state = initialState, action) => {
     case "IS_SIGNED":
       return {
         ...state,
+        userID: action.userID,
         isSigned: action.isSigned
       };
     default:

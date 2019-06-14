@@ -29,8 +29,11 @@ class Auth extends Component {
 
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
-      console.log(user);
-      this.props.isSignedIn(!!user);
+      let userID;
+      if(user){
+        userID = user.uid
+      }
+      this.props.isSignedIn(!!user, userID);
     });
   };
 

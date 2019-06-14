@@ -5,7 +5,6 @@ export default (state = {}, action) => {
     case "GET_TODOS":
       return { ...state, ..._.mapKeys(action.todos, "id") };
     case "ADD_TODO":
-      console.log(action.formValues);
       return { ...state, [action.formValues.id]: action.formValues };
     case "DELETE_TODO":
       return _.omit(state, action.payload);
